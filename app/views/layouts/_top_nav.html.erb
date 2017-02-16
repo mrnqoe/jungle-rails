@@ -44,15 +44,23 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
+        <% if !current_user %>
         <li>
-          <% logged = true %>
-          <% if logged %>
-            <%= link_to '/signup' %>
-            <!-- <%= link_to '/login'%>
-          <% else %>
-            <%= link_to '/logout'%> -->
-          <% end %>
+          <%= link_to 'Register','/signup' %>
         </li>
+        <li>
+          <%= link_to 'Log in','/login' %>
+        </li>
+        <% else %>
+        <li>
+          <a>
+            <%= current_user.first_name %>
+          </a>
+        </li>
+        <li>
+          <%= link_to 'Log out','/logout' %>
+        </li>
+        <% end %>
       </ul>
     </div>
   </div>
