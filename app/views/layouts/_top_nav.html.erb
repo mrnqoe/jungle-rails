@@ -45,8 +45,12 @@
           <% end %>
         </li>
         <li>
-          <%= link_to users_path do %>
-            Register
+          <% logged = true %>
+          <% if logged %>
+            <%= link_to '/signup' %>
+            <!-- <%= link_to '/login'%>
+          <% else %>
+            <%= link_to '/logout'%> -->
           <% end %>
         </li>
       </ul>
