@@ -5,6 +5,9 @@
   </header>
 
   <div class="order-summary jumbotron">
+    <h1>
+      <%= @order.email %>
+    </h1>
     <% @order.line_items.each do |item| %>
       <%= render 'item', product: Product.find_by(id: item.product_id) %>
     <% end %>

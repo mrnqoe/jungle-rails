@@ -1,10 +1,10 @@
 class UserMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: 'mrnqo404@gmail.com'
 
   layout "mailer"
 
-  def user_mailer(order)
-    @order = order
+  def user_mailer(user)
+    @user = user
     mail(
     to:            'niqla@me.com',
     subject:       "Welcome to My Awesome Site",

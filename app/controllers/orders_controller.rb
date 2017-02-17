@@ -8,14 +8,20 @@ class OrdersController < ApplicationController
   def create
     charge = perform_stripe_charge
     order  = create_order(charge)
-
-    if order.valid?
-      empty_cart!
-      UserMailer.user_mailer(order).deliver_now
-      redirect_to order, notice: 'Your Order has been placed.'
-    else
-      redirect_to cart_path, error: order.errors.full_messages.first
-    end
+    # respond_to do |format|
+      if order.valid?
+        # Sends email to user when user is created.
+        empty_cart!
+        ExampleMailer.sample_email(order).deliver_now
+        # format.html { redirect_to(order.email, notice: "Order was successfully created.") }
+        # format.json { render :show, status: :created, location: order }
+        redirect_to order, notice: 'Your Order has been placed.'
+      else
+        format.html { render :new }
+        format.json { render json: order.errors, status: :unprocessable_entity }
+        redirect_to cart_path, error: order.errors.full_messages.first
+      end
+    # end
 
   rescue Stripe::CardError => e
     redirect_to cart_path, error: e.message
@@ -41,7 +47,7 @@ class OrdersController < ApplicationController
     order = Order.new(
       email: params[:stripeEmail],
       total_cents: cart_total,
-      stripe_charge_id: stripe_charge.id, # returned by stripe
+      stripe_charge_id: stripe_charge.id # returned by stripe
     )
     cart.each do |product_id, details|
       if product = Product.find_by(id: product_id)
