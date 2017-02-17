@@ -5,6 +5,9 @@
   </header>
 
   <div class="order-summary jumbotron">
+    <% @order.line_items.each do |product_id| %>
+      <%= render 'item', product: Product.find_by(id: product_id) %>
+    <% end %>
     <h4>Thank you for your order!</h4>
   </div>
 
