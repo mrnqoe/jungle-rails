@@ -1,5 +1,7 @@
 class Admin::UsersController < ApplicationController
 
+  before_filter :authenticate
+
   def show
     @users = User.find params[:id]
   end
@@ -20,6 +22,12 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
+  def authenticate
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['ADMIN_USER'] && password == ENV['ADMIN_PASS']
+    end
+  end
 
   def user_params
     params.require(:user).permit(
