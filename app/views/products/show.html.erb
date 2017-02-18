@@ -74,12 +74,19 @@
           <dl>
             <% @product.reviews.reverse_each do |r| %>
               <% if current_user == r.user %>
-                <%= button_to 'butter', product_review_path(product_id: @product.id, id: r.id), method: 'delete', data:{ confirm: 'Are you sure ?'} %>  
+                <%= button_to 'butter', product_review_path(product_id: @product.id, id: r.id), method: 'delete', data:{ confirm: 'Are you sure ?'} %>
               <% end %>
+              <dt>user</dt>
+              <dd>
+                <%= User.find(r.user_id).first_name %>
+                <%= User.find(r.user_id).last_name %>
+              </dd>
+
               <dt>Description</dt>
               <dd>
                 <%= r.description %>
               </dd>
+
               <dt>Rating</dt>
               <dd>
                 <%= r.rating %>
