@@ -12,7 +12,9 @@ class OrdersController < ApplicationController
       if order.valid?
         # Sends email to user when user is created.
         empty_cart!
-        ExampleMailer.sample_email(order).deliver_now
+        puts ENV['gmail_username']
+        puts ENV['gmail_password']
+        ExampleMailer.sample_email(order).deliver_later
         format.json { render :show, status: :created, location: order.email }
         format.html { redirect_to(order, notice: 'Your Order has been placed.') }
       else
