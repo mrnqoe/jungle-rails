@@ -1,8 +1,7 @@
 class ExampleMailer < ActionMailer::Base
-  default from: "from@exAmple.com"
 
   def sample_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Sample Email')
+    mail(to: 'mrnqoe@gmail.com', subject: 'Sample Email')
   end
 end
