@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @product = Product.find(params[:product_id])
     Review.find(params[:id]).destroy
     @product.reviews.reload()
     redirect_to :back

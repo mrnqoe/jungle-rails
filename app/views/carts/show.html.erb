@@ -4,7 +4,7 @@
     <h1>My Cart</h1>
   </header>
 
-  <%if !cart[0] %>
+  <%if cart.size == 0 %>
     <div class="">
       <p>NOTHING IN YOUR CART DUMMY</p>
       <%= link_to('GTFO', '/')%>
