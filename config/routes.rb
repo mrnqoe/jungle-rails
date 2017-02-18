@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :show, :new]
   resources :sessions, only: [:create, :destroy, :new]
   resources :products, only: [:index, :show] do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:create, :destroy]
   end
   resources :categories, only: [:index]
 
@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
-
   # These routes will be for signup. The first renders a form in the browse, the second
   # will receive the form and create a user in our database using the data given to us by
   # the user.

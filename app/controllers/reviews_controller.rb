@@ -6,16 +6,17 @@ class ReviewsController < ApplicationController
     @review.user = current_user
 
     if @review.save
-      puts 'SAVED'
-      puts current_user
-      redirect_to :back, notice: 'Review was Submitted !'
-
+      redirect_to controller: 'products', action: 'show', id: @review.product_id
     else
-      puts 'NOT SAVED'
-      puts current_user
       @product.reviews.reload()
-      render 'products/show', notice: 'there was an issue with your submission'
+      render 'products/show'
     end
+  end
+
+  def destroy
+    Review.find(params[:id]).destroy
+    @product.reviews.reload()
+    redirect_to :back
   end
 
   private
