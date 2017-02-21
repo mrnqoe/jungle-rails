@@ -26,8 +26,8 @@ RSpec.feature "Visitor navigates to product page", type: :feature, js: true do
 
     # VERIFY
     expect(page).to have_text "My Cart (1)"
-    save_screenshot
-    puts page.html
+    # save_screenshot
+    # puts page.html
   end
 
 end
