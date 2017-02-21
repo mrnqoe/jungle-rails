@@ -11,17 +11,17 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
+      # Product quantity adjustment HERE !
       redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, error: order.errors.full_messages.first
     end
 
-  rescue Stripe::CardError => e
-    redirect_to cart_path, error: e.message
+    rescue Stripe::CardError => e
+      redirect_to cart_path, error: e.message
   end
 
   private
-
   def empty_cart!
     # empty hash means no products in cart :)
     update_cart({})
