@@ -17,17 +17,17 @@ RSpec.feature "Visitor navigates to product page", type: :feature, js: true do
     # end
   end
 
-  scenario "They see details of one product" do
+  scenario "They add one product to their cart" do
     # ACT
     visit root_path
-    find_link("Details").trigger('click')
+    find_link("Add").trigger('click')
 
     # DEBUG
 
     # VERIFY
-    expect(page).to have_css 'section.products-show'
-    # save_screenshot
-    # puts page.html
+    expect(page).to have_text "My Cart (1)"
+    save_screenshot
+    puts page.html
   end
 
 end
