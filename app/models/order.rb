@@ -10,12 +10,6 @@ class Order < ActiveRecord::Base
   after_create :ordercomplete
 
   def ordercomplete
-    # puts '=================================='
-    # order_id = self.id
-    # puts order_id
-    # lineItem = LineItem.find_by(order_id: order_id)
-    # puts lineItem
-    # puts '=================================='
     self.line_items.each do |item|
       @product = item.product
       @product.decrement!('quantity', by = item.quantity)
