@@ -5,7 +5,7 @@
 - Admin category management
 - Empty-cart-fix
 - Order-details
-- product-quantity-adjustment
+- product quantity
 - product-ratings
 - product-specs
 - sold-out-badge

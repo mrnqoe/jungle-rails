@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    # OrderMailer.order_email(@order).deliver_later
   end
 
   def create
@@ -10,6 +9,7 @@ class OrdersController < ApplicationController
     order  = create_order(charge)
 
     if order.valid?
+      OrderMailer.order_email(@order).deliver_later
       empty_cart!
       # Product quantity adjustment HERE !
       redirect_to order, notice: 'Your Order has been placed.'

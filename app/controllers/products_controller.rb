@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  def index
+  def index 
     @products = Product.all.order(created_at: :desc)
   end
 

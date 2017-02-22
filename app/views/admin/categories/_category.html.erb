@@ -1,5 +1,20 @@
 <tr>
   <td>
+    <h4><%= category.id %></h4>
+  </td>
+  <td>
     <h4><%= category.name %></h4>
+  </td>
+  <td>
+    <% @amount = 0 %>
+    <% Product.all.each do |p| %>
+      <% if p.category_id ==  category.id %>
+        <% @amount += 1 %>
+      <% end %>
+    <% end %>
+    <h4><%= @amount %></h4>
+  </td>
+  <td>
+    <h4><%= category.created_at %></h4>
   </td>
 </tr>

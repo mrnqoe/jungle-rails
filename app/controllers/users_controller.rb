@@ -5,12 +5,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    # user_params.email_confirmation.strip!
-    # user_params.email.strip!
-    #
-    # user_params.email_confirmation.downcase!
-    # user_params.email.downcase!
-
+    
     @user = User.new(user_params)
 
     if @user.save
