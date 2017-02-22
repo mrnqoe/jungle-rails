@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'products#index'
   resources :users, only: [:create, :new]
-  resources :sessions, only: [:create, :destroy, :new]
+  resources :sessions, only: [:create, :destroy]
   resources :products, only: [:index, :show] do
     resources :reviews, only: [:create, :destroy]
   end
@@ -17,9 +17,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'dashboard#show'
-    resources :users, except: [:edit, :update, :show]
+    # resources :users, except: [:edit, :update, :show]
     resources :products, except: [:edit, :update, :show]
-    resources :categories, except: [:edit, :update, :show]
+    resources :categories, except: [:edit, :update, :show, :destroy]
   end
 
   get '/login' => 'sessions#new'

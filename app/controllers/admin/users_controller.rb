@@ -2,13 +2,6 @@ class Admin::UsersController < ApplicationController
 
   before_filter :authenticate
 
-  def show
-    @users = User.find params[:id]
-  end
-
-  def new
-    @user = User.new
-  end
 
 # WOULDNT IT BE COOL IF GOD COULD CREATE USERS ???
   # def create
@@ -23,6 +16,18 @@ class Admin::UsersController < ApplicationController
   # end
 
   private
+  
+  def show
+    @users = User.find params[:id]
+  end
+
+  def index
+    @users = User.all
+  end
+
+  def new
+    @user = User.new
+  end
 
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|

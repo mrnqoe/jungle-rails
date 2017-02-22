@@ -3,6 +3,7 @@ class Admin::DashboardController < ApplicationController
   before_filter :authenticate
 
   def show
+    @users = User.all
   end
 
   private
