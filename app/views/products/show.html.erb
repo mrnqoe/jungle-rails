@@ -9,8 +9,8 @@
     <div class="row">
 
       <div class="col-sm-4 thumbnail">
-        <% @imgurl = image_url product.image.thumb, host: "https://s3.ca-central-1.amazonaws.com/junglebook/" %>
-        <%= image_tag @imgurl, alt: product.name %>
+        <% @imgurl = image_url @product.image.thumb, host: "https://s3.ca-central-1.amazonaws.com/junglebook/" %>
+        <%= image_tag @imgurl, alt: @product.name %>
       </div>
 
       <div class="col-sm-8">
