@@ -6,7 +6,8 @@
 
   <tr>
     <td>
-      <%= image_tag product.image.tiny %>
+      <% @imgurl = image_url product.image.tiny, host: "https://s3.ca-central-1.amazonaws.com/junglebook/" %>
+      <%= image_tag @imgurl, alt: product.name %>
     </td>
     <td>
       <h4><%= product.name %></h4>
