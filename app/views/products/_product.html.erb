@@ -1,7 +1,9 @@
 <article class="product">
   <header>
     <%= link_to product do %>
-      <%= image_tag product.image.thumb, alt: product.name %>
+    <!-- <%= image_path(product.image) %> -->
+      <% @imgurl = image_url product.image.thumb, host:"https://s3.ca-central-1.amazonaws.com/junglebook/" %>
+      <%= image_tag @imgurl, alt:image_path(product.image) %>
       <h4><%= product.name %></h4>
     <% end %>
   </header>
