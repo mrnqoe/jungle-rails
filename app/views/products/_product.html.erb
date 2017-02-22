@@ -1,7 +1,8 @@
 <article class="product">
   <header>
     <%= link_to product do %>
-      <%= image_tag product.image.thumb, alt:image_path(product.image) %>
+      <% @imgurl = image_url product.image.thumb %>
+      <%= image_tag @imgurl, alt: product.name %>
       <h4><%= product.name %></h4>
     <% end %>
   </header>
