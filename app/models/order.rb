@@ -7,4 +7,13 @@ class Order < ActiveRecord::Base
 
   validates :stripe_charge_id, presence: true
 
+  after_create :ordercomplete
+
+  def ordercomplete
+    self.line_items.each do |item|
+      @product = item.product
+      @product.decrement!('quantity', by = item.quantity)
+    end
+  end
+
 end

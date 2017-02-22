@@ -21,7 +21,7 @@
           </a>
           <ul class="dropdown-menu">
             <% Category.all.each do |category| %>
-              <li><%= link_to category.name, categories_path %></li>
+              <li><%= link_to category.name, category %></li>
             <% end %>
           </ul>
         </li>
@@ -41,7 +41,11 @@
         </li>
         <li>
           <%= link_to cart_path do %>
-            <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
+            <% @cartamount = 0 %>
+            <% cart.each do |i| %>
+              <% @cartamount += i[1]['quantity'] %>
+            <% end %>
+            <%= fa_icon "shopping-cart" %> My Cart (<%= @cartamount %>)
           <% end %>
         </li>
         <% if !current_user %>

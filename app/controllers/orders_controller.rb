@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    # OrderMailer.order_email(@order).deliver_later
   end
 
   def create
@@ -24,12 +23,11 @@ class OrdersController < ApplicationController
       end
     end
 
-  rescue Stripe::CardError => e
-    redirect_to cart_path, error: e.message
+    rescue Stripe::CardError => e
+      redirect_to cart_path, error: e.message
   end
 
   private
-
   def empty_cart!
     # empty hash means no products in cart :)
     update_cart({})
