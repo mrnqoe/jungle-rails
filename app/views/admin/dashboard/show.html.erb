@@ -1,2 +1,147 @@
-<h1>Admin::Dashboard#show</h1>
+<h1>Admin::Dashboard</h1>
 <p>Find me in app/views/admin/dashboard/show.html.erb</p>
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#usersCollapse" aria-expanded="true" aria-controls="usersCollapse">
+  All Users
+</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#productsCollapse" aria-expanded="false" aria-controls="productsCollapse">
+  All Products
+</button>
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#categoriesCollapse" aria-expanded="false" aria-controls="categoriesCollapse">
+  All Categories
+</button>
+
+<section class="admin-user-index collapse" id="usersCollapse">
+
+  <header class="page-header">
+    <h1>Admin &raquo; All Users</h1>
+  </header>
+<!-- USER CREATION NOT YET IMPLEMENTED ;) -->
+  <div class="well">
+    <%= link_to '+ New User', '/', class: 'btn btn-info disabled'%>
+  </div>
+
+  <div class="panel panel-default user">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>email</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% User.all.each do |u| %>
+        <tr>
+          <td>
+            <p><%= u.id %></p>
+          </td>
+          <td>
+            <p><%= u.email %></p>
+          </td>
+          <td>
+            <%= u.first_name %>
+          </td>
+          <td>
+            <%= u.last_name %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+</section>
+
+
+<section id="productsCollapse" class="admin-products-index collapse">
+
+  <header class="page-header">
+    <h1>Admin &raquo; All Products</h1>
+  </header>
+
+  <div class="well">
+    <%= link_to 'Products', admin_products_path, class: 'btn btn-info' %>
+  </div>
+
+  <div class="panel panel-default products">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Product</th>
+          <th>Category id</th>
+          <th>Price</th>
+          <th>Qty Remaining</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Product.all.each do |p| %>
+        <tr>
+          <td>
+            <p><%= p.id %></p>
+          </td>
+          <td>
+            <p><%= p.name %></p>
+          </td>
+          <td>
+            <p><%= Category.find(p.category_id).name %></p>
+          </td>
+          <td>
+            <%= p.price %>
+          </td>
+          <td>
+            <%= p.quantity %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+</section>
+
+
+<section id="categoriesCollapse" class="admin-products-index collapse">
+
+  <header class="page-header">
+    <h1>Admin &raquo; All Categories</h1>
+  </header>
+
+  <div class="well">
+    <%= link_to 'Categories', admin_categories_path, class: 'btn btn-info' %>
+  </div>
+
+  <div class="panel panel-default categories">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Category.all.each do |c| %>
+        <tr>
+          <td>
+            <p><%= c.id %></p>
+          </td>
+          <td>
+            <p><%= c.name %></p>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
+</section>

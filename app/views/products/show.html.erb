@@ -1,33 +1,44 @@
 <section class="products-show">
 
   <header class="page-header">
-
+    <h1><%= @product.name %></h1>
   </header>
 
   <article class="product-detail">
 
     <div class="row">
 
-      <div class="col-sm-4">
+      <div class="col-sm-4 thumbnail">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
 
       <div class="col-sm-8">
-        <dl class="dl-horizontal">
-          <dt>Name</dt>
-          <dd><%= @product.name %></dd>
-          <dt>Description</dt>
-          <dd><%= @product.description %></dd>
-          <dt>Quantity</dt>
-          <dd><%= @product.quantity %></dd>
-          <dt>Price</dt>
-          <dd><%= @product.price %></dd>
-        </dl>
+        <div class="panel panel-default">
+          <!-- <div class="panel-heading">
+            <strong>
+              <%= @product.name %>
+            </strong>
+          </div> -->
+          <div class="panel-body text-center">
+            <h5>
+              <%= @product.description %>
+            </h5>
+          </div><!-- /panel-body -->
+          <div class="panel-footer">
+            <button class="btn btn-primary" type="button">
+            <span class="badge"><%= @product.price %> $</span>
+            </button>
+            <button class="btn btn-primary pull-right" type="button">
+              Quantity <span class="badge"><%= @product.quantity %></span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
   </article>
 </section>
+
 <section>
 
   <article class="product-detail">
@@ -64,39 +75,48 @@
         <% end %>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-sm-4">
-        <p>Hello</p>
-      </div>
-      <div class="col-sm-8">
-        <div class="dl-horizontal">
-          <dl>
-            <% @product.reviews.reverse_each do |r| %>
-              <% if current_user == r.user %>
-                <%= button_to 'butter', product_review_path(product_id: @product.id, id: r.id), method: 'delete', data:{ confirm: 'Are you sure ?'} %>
-              <% end %>
-              <dt>user</dt>
-              <dd>
-                <%= User.find(r.user_id).first_name %>
-                <%= User.find(r.user_id).last_name %>
-              </dd>
-
-              <dt>Description</dt>
-              <dd>
-                <%= r.description %>
-              </dd>
-
-              <dt>Rating</dt>
-              <dd>
-                <%= r.rating %>
-              </dd>
-            <% end %>
-          </dl>
-        </div>
-      </div>
-    </div>
-
   </article>
 
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>User Reviews</h3>
+    </div><!-- /col-sm-12 -->
+  </div><!-- /row -->
+  <div class="row">
+    <% @product.reviews.reverse_each do |r| %>
+      <% if current_user == r.user %>
+        <%= button_to 'butter', product_review_path(product_id: @product.id, id: r.id), method: 'delete', data:{ confirm: 'Are you sure ?'} %>
+      <% end %>
+      <div class="col-sm-1">
+        <img class="img-responsive img-circle" src="http://lorempixel.com/500/500">
+      </div><!-- /col-sm-1 -->
+      <div class="col-sm-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>
+              <%= User.find(r.user_id).first_name %>
+              <%= User.find(r.user_id).last_name %>
+            </strong>
+          </div>
+          <div class="panel-body">
+            <%= r.description %>
+          </div><!-- /panel-body -->
+          <div class="panel-footer">
+            <a class='btn btn-successful'>
+              <%= fa_icon "star", text: "#{r.rating}" %>
+            </a>
+            <strong>
+              <span class="text-muted pull-right">
+                <%= time_ago_in_words(r.created_at.to_date) %>
+                ago
+              </span>
+            </strong>
+          </div>
+        </div><!-- /panel panel-default -->
+      </div><!-- /col-sm-5 -->
+    <% end %>
+  </div>
 </section>

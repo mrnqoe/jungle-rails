@@ -8,7 +8,7 @@
 6.	---FIX CATEGORIES INDEX---
 7.	GO CRAZY WITH BOOTSTRAP
 8.  ---REMOVE EXPOSED UNUSED ROUTES---
-9.  All admin controllers should inherit from Admin::BaseController~~~~~~~~
+9.  ---All admin controllers should inherit from Admin::BaseController~~~~~~~~
 10. ---FIX EMAIL---
 11. MAKE A BETTER EMPTY CART PAGE
-12. MAKE PRODUCT REVIEW BETTER
+12. ---MAKE PRODUCT REVIEW BETTER---

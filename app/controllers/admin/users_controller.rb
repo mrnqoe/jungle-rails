@@ -1,47 +1,19 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::BaseAdminController
 
   before_filter :authenticate
 
-
-# WOULDNT IT BE COOL IF GOD COULD CREATE USERS ???
-  # def create
-  #   @user = User.new(user_params)
-  #
-  #   if @user.save
-  #     session[:user_id] = user.id
-  #     redirect_to '/'
-  #   else
-  #     redirect_to '/signup'
-  #   end
-  # end
-
   private
-  
-  def show
-    @users = User.find params[:id]
-  end
 
-  def index
-    @users = User.all
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV['ADMIN_USER'] && password == ENV['ADMIN_PASS']
+    def show
+      @users = User.find params[:id]
     end
-  end
 
-  def user_params
-    params.require(:user).permit(
-    :email,
-    :password,
-    :password_confirmation,
-    :first_name,
-    :last_name)
-  end
+    def index
+      @users = User.all
+    end
+
+    def new
+      @user = User.new
+    end
 
 end

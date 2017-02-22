@@ -1,4 +1,4 @@
-class Admin::ProductsController < ApplicationController
+class Admin::ProductsController < Admin::BaseAdminController
 
   before_filter :authenticate
 
@@ -24,25 +24,6 @@ class Admin::ProductsController < ApplicationController
     @product = Product.find params[:id]
     @product.destroy
     redirect_to [:admin, :products], notice: 'Product deleted!'
-  end
-
-  private
-
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV['ADMIN_USER'] && password == ENV['ADMIN_PASS']
-    end
-  end
-
-  def product_params
-    params.require(:product).permit(
-      :name,
-      :description,
-      :category_id,
-      :quantity,
-      :image,
-      :price
-    )
   end
 
 end

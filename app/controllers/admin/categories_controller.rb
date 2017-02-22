@@ -1,4 +1,4 @@
-class Admin::CategoriesController < ApplicationController
+class Admin::CategoriesController < Admin::BaseAdminController
 
   before_filter :authenticate
 
@@ -18,18 +18,6 @@ class Admin::CategoriesController < ApplicationController
     else
       render :new
     end
-  end
-
-  private
-
-  def authenticate
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV['ADMIN_USER'] && password == ENV['ADMIN_PASS']
-    end
-  end
-
-  def category_params
-    params.require(:category).permit(:name)
   end
 
 end
