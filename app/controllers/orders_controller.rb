@@ -24,6 +24,7 @@ class OrdersController < ApplicationController
     end
 
     rescue Stripe::CardError => e
+      flash[:error] = e.message
       redirect_to cart_path, error: e.message
   end
 

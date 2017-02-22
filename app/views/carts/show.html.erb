@@ -43,7 +43,7 @@
       <div class="col-xs-12">
         <%= form_tag orders_path do %>
           <script
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            src="https://checkout.stripe.com/checkout.js" id="stripe-button1" class="stripe-button"
             data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
             data-amount="<%= @cart_total * 100 %>"
             data-name="Jungle"
@@ -51,6 +51,14 @@
             data-locale="auto"
             data-email="kvirani@gmail.com"
             data-currency="cad">
+            document.getElementByClass('stripe-button-el').addEventListener("click", function(){
+              handler.open({
+                image: '/squre-image.png',
+                name: 'Demo site',
+                description: '2 widgets',
+                amount: 2000
+              })
+            })
           </script>
         <% end %>
       </div>
