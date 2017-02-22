@@ -6,8 +6,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   helper_method :current_user
+  helper_method :authorize
+  helper_method :perform_stripe_charge
 
   private
+
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
@@ -29,5 +32,16 @@ class ApplicationController < ActionController::Base
     }
     cookies[:cart]
   end
+
+  def perform_stripe_charge
+    Stripe::Charge.create(
+    source:      params[:stripeToken],
+    amount:      cart_total, # in cents
+    description: "Khurram Virani's Jungle Order",
+    currency:    'cad'
+    )
+  end
+
+
 
 end
